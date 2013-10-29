@@ -58,13 +58,13 @@ input assets.scripts do
     concat ['vendor.js'], paths
   end
 
-  # if assets.production?
-  #   match 'min/app.js' do
-  #     strip_debug
-  #     # uglify squeeze: true
-  #     concat 'app.js'
-  #   end
-  # end
+  if assets.production?
+    match 'min/app.js' do
+      # strip_debug
+      # uglify squeeze: true
+      concat 'app.js'
+    end
+  end
 end
 
 output 'public/styles'
