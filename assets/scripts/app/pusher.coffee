@@ -13,6 +13,7 @@ $.extend Travis.Pusher.prototype,
   init: (config) ->
     Pusher.warn = @warn.bind(this)
     Pusher.host = config.host if config.host
+    console.log(config)
     @pusher = new Pusher(config.key, encrypted: Travis.Pusher.ENCRYPTED, disableStats: true)
     @subscribeAll(Travis.Pusher.CHANNELS) if Travis.Pusher.CHANNELS
 
