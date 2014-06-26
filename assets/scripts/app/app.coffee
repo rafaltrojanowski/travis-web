@@ -33,9 +33,8 @@ unless window.TravisApplication
         klass.adapter = Travis.Adapter.create()
         klass.url = "/#{klass.pluralName()}"
 
-      @slider = new Travis.Slider()
-      @pusher = new Travis.Pusher(key: Travis.config.pusher_key, host: Travis.config.pusher_host) if Travis.config.pusher_key
-      @pusher = new Travis.Pusher(Travis.config.pusher_key) if Travis.config.pusher_key
+      @slider  = new Travis.Slider()
+      @pusher  = new Travis.Pusher(key: Travis.config.pusher_key, host: Travis.config.pusher_host) if Travis.config.pusher_key
       @tailing = new Travis.Tailing($(window), '#tail', '#log')
       @toTop   = new Travis.ToTop($(window), '.to-top', '#log-container')
 
