@@ -55,3 +55,23 @@ test 'it takes into account all the jobs when getting config keys', ->
 
   deepEqual(rawConfigKeys, ['rvm', 'env', 'gemfile', 'jdk' ])
   deepEqual(configKeys, [ 'Job', 'Duration', 'Finished', 'Ruby', 'ENV', 'Gemfile', 'JDK' ])
+
+test 'build can be canceled if any of the jobs is cancelable', ->
+  Travis.Build.load [{ id: '1', job_ids: ['1', '2'], state: 'running' }]
+
+  Travis.Job.load [{ id: '1', state: 'running' }]
+  Travis.Job.load [{ id: '2', state: 'finished' }]
+
+  build = null
+  job   = null
+  Ember.run ->
+    build = Travis.Build.find '1'
+    job   = Travis.Job.find '1'
+
+  ok(build.get('canCancel'))
+
+  Ember.run -> build.set('state', 'finished')
+  ok(build.get('canCancel'))
+
+  Ember.run -> job.set('state', 'finished')
+  ok(!build.get('canCancel'))

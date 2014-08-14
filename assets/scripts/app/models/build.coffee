@@ -75,8 +75,8 @@ require 'travis/model'
   ).property('rawConfigKeys.length')
 
   canCancel: (->
-    !@get('isFinished') && @get('jobs').filter( (j) -> j.get('canCancel') ).get('length') > 0
-  ).property('isFinished', 'jobs.@each.canCancel')
+    @get('jobs').filter( (j) -> j.get('canCancel') ).get('length') > 0
+  ).property('jobs.@each.canCancel')
 
   cancel: (->
     Travis.ajax.post "/builds/#{@get('id')}/cancel"
