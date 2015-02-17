@@ -20,7 +20,7 @@ install:
   - bower install
 
 script:
-  - echo 'foo'
+  - npm test
 
 notifications:
   campfire:
