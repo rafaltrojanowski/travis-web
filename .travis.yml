@@ -33,3 +33,6 @@ deploy:
   bucket: drogus-travis-maintenance-test
   skip_cleanup: true
   acl: public_read
+  local_dir: dist
+  on:
+    branch: maintenance-s3-deploy
